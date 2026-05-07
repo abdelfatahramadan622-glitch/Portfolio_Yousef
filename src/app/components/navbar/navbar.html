@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <!-- اليسار: اللوجو -->
+    <div class="logo">
+      <a routerLink="/" (click)="scrollToTop()">
+        <img src="/123.png" alt="Youssef Salah"> 
+      </a>
+    </div>
+
+    <!-- المنتصف: الروابط -->
+    <ul class="nav-links">
+      <li><a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+      <li><a routerLink="/about" routerLinkActive="active-link">About</a></li>
+      <li><a routerLink="/portfolio" routerLinkActive="active-link">Portfolio</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active-link">Contact Us</a></li>
+    </ul>
+
+    <!-- اليمين: السوشيال ميديا -->
+    <div class="social-media">
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</nav>

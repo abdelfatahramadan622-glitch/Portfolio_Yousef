@@ -1,0 +1,5 @@
+/* نستخدم المتغيرات من styles.css */
+.content-wrapper {
+  width: 100%;
+  display: block;
+}

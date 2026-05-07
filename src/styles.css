@@ -1,0 +1,58 @@
+/* 1. تعاريف الألوان والثوابت */
+:root {
+  --bg-dark: #203c78;        /* خلفية الصفحة - Deep Navy Black */
+  --bg-nav: #000000;         /* خلفية النافبار والقوائم */
+  --accent-color: #9b70f0;   /* اللون المميز - Sky Blue */
+  --text-primary: #f8fafc;   /* النص الأساسي - Off White */
+  --text-secondary: #ffffff; /* النص الفرعي - Grayish */
+  --transition: 0.3s ease-in-out;
+}
+
+/* 2. إعدادات الصفحة الأساسية */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* styles.css */
+
+
+body {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 3. تنسيق الروابط العام */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+/* 4. تخصيص الـ Scrollbar ليكون متناسق مع الأسود */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* 5. حاوية المحتوى الرئيسية لمنع التداخل مع النافبار */
+.content-wrapper {
+  padding-top: 80px; /* مساحة تساوي ارتفاع النافبار */
+  min-height: 100vh;
+}

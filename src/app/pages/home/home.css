@@ -1,0 +1,934 @@
+
+/* أي حاجة جوه سكشن الـ reveal هتبدأ مخفية ومن تحت */
+.reveal-effect > * {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: transform, opacity;
+}
+
+/* 1. إعدادات عامة للمشروع */
+:root {
+  --main-bg: #0f0f0f;      /* أسود مريح للعين */
+  --card-bg: #1a1a1a;      /* أسود فاتح شوية للسكاشن */
+  --accent-color: #a4d43c; /* الأخضر الليموني */
+  --text-white: #ffffff;
+  --text-gray: #a0a0a0;
+}
+
+/* تهيئة الصفحة للأنميشن */
+body {
+  overflow-x: hidden; /* عشان العناصر اللي جاية من بره الشاشة متبوظش العرض */
+  background-color: #000;
+}
+
+
+/* تنعيم حركة الـ Scroll في الصفحة كلها */
+html {
+  scroll-behavior: auto !important; /* GSAP ScrollTrigger بيفضل الـ auto */
+}
+
+
+/* تأكد إن الـ Body خلفيته غامقة عشان ميبقاش فيه بياض في الفواصل */
+:host {
+  display: block;
+  background-color: var(--main-bg);
+}
+
+
+/* 2. Hero Section */
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 8%;
+  background-color: var(--main-bg);
+  color: white;
+  overflow: hidden;
+  position: relative;
+  
+}
+
+.name {
+  font-size: 5rem;
+  font-weight: 800;
+  margin: 10px 0;
+  color: white; /* خليه أبيض سادة لو التدرج عامل مشكلة */
+  line-height: 1;
+}
+
+.highlight {
+  color: var(--accent-color);
+  display: inline-block;
+  transition: text-shadow 0.3s ease;
+}
+
+
+.highlight:hover {
+  text-shadow: 0 0 15px rgba(164, 212, 60, 0.6);
+}
+
+
+
+
+
+/* 3. حاوية الصورة - التعديلات بسيطة جداً ولن تؤثر على الشكل */
+.image-wrapper {
+  position: relative;
+  display: flex; /* لضمان توسط المحتوى بدقة */
+  justify-content: center;
+  align-items: center;
+  width: 450px; 
+  height: 450px;
+  cursor: pointer;
+  z-index: 10;
+  /* أهم حاجة: تصفير أي Transform ابتدائي لضمان بداية نظيفة لـ GSAP */
+  transform: translate(0, 0); 
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: none !important; /* ممنوع الـ Transition عشان ميعطلش الـ JS */
+  
+  /* باقي ستايلك زي ما هو بالظبط */
+  background: var(--card-bg);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  pointer-events: none; /* عشان الماوس يروح للـ wrapper */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+/* البادج الموف - كما هو مع ضمان عدم اعتراض الماوس */
+.logo-badge-integrated {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 130px;
+  height: 130px;
+  background: var(--accent-color);
+  border: 10px solid var(--main-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-weight: bold;
+  pointer-events: none; /* سطر مهم عشان الماوس ميقفش عليه */
+  z-index: 5;
+  animation: slowRotate 15s linear infinite;
+}
+
+
+
+
+
+
+
+@keyframes slowRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 4. السكاشن اللي تحت الـ Hero (إصلاح الظهور) */
+.about-section, .portfolio-summary {
+  padding: 100px 5%;
+  text-align: center;
+  background-color: var(--main-bg); /* توحيد اللون */
+  color: white;
+  /* شيلنا الـ opacity 0 مؤقتاً عشان تضمن إنها ظاهرة */
+  border-top: 1px solid #222; 
+}
+
+.portfolio-summary {
+  background-color: var(--card-bg); /* تمييز بسيط لسكشن البورتفوليو */
+}
+
+.about-text, .portfolio-subtitle {
+  color: var(--text-gray);
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* 5. Filter Buttons */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter-btn {
+  background: transparent;
+  color: white;
+  border: 1px solid #444;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-container { flex-direction: column-reverse; text-align: center; padding: 120px 20px 50px; }
+  .image-wrapper { width: 300px; height: 300px; }
+  .name { font-size: 3rem; }
+}
+
+
+
+
+
+/* --- Campaign Section --- */
+.campaign-detail {
+  background-color: #0a0a0a;
+  padding: 100px 5%; /* زيادة الـ padding لراحة العين */
+  color: white;
+  border-top: 1px solid #1a1a1a;
+}
+
+.campaign-title {
+  color: var(--accent-color);
+  font-size: 2.8rem; /* تكبير بسيط */
+  text-align: center;
+  margin-bottom: 80px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.campaign-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* توزيع الصور الاحترافي */
+.campaign-visuals {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 10px; /* زيادة الفجوة بين الصور */
+  align-items: center; /* توسيط رأسي للصور */
+  margin-bottom: 60px;
+}
+
+.main-shot {
+  width: 100%;
+  height: 450px; /* ارتفاع ثابت ومقبول */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+}
+
+.main-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* بيخلي الصورة تملأ المكان من غير ما تتمط */
+  transition: transform 0.5s ease;
+}
+
+.main-shot:hover img {
+  transform: scale(1.05); /* تأثير زووم بسيط عند الـ hover */
+}
+
+.mood-board {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+}
+
+.assets-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* عشان تفاصيل الكولاج متتقصش */
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+}
+
+/* معلومات المشروع - ترتيب أنضف */
+.campaign-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.project-name {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  font-style: italic;
+  letter-spacing: -1px;
+}
+
+.project-description {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #b0b0b0; /* لون رمادي هادي للوصف */
+  max-width: 90%;
+  margin-bottom: 40px;
+}
+
+.project-description strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* زر Learn More بشكل مودرن */
+.learn-more {
+  align-self: flex-end; /* بيجيبه يمين من غير float */
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 5px 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.learn-more:hover {
+  border-bottom-color: var(--accent-color);
+  padding-right: 10px; /* حركة بسيطة لليمين */
+}
+
+.learn-more span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.learn-more:hover span {
+  transform: translateX(5px);
+}
+
+/* Responsive - تعديلات ذكية للموبايل */
+@media (max-width: 992px) {
+  .campaign-visuals {
+    grid-template-columns: 1fr; /* الصور فوق بعض */
+    gap: 20px;
+  }
+  
+  .main-shot, .mood-board {
+    height: 350px; /* تصغير الارتفاع في الشاشات الوسط */
+  }
+
+  .campaign-title {
+    font-size: 2rem;
+  }
+
+  .project-name {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .project-description {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .learn-more {
+    align-self: center; /* يتوسط في الموبايل */
+  }
+}
+
+/* السكشن المقلوب */
+.campaign-detail.reversed {
+  background-color: #080808; /* أغمق سيكا للفصل */
+  padding: 100px 5%;
+}
+
+.campaign-detail.reversed .campaign-visuals {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* الـ Billboard أصغر شوية من الصورة الأساسية */
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+/* ستايل الـ Billboard الشيك بـ عمق 3D */
+.billboard-wrapper {
+  position: relative;
+  perspective: 1500px; /* زودنا العمق شوية */
+}
+
+.billboard-frame {
+  width: 100%;
+  height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: -20px 30px 60px rgba(0,0,0,0.8); /* الظل ناحية الشمال */
+  transform: rotateY(15deg) rotateX(5deg); /* ميل احترافي */
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  border: 12px solid #151515;
+  background: #000;
+}
+
+.billboard-frame:hover {
+  transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+}
+
+.billboard-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: 0.5s;
+}
+
+.billboard-frame:hover img {
+  opacity: 1;
+}
+
+/* الصورة اللي على اليمين */
+.main-shot-v2 {
+  width: 100%;
+  height: 450px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.main-shot-v2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+
+
+
+/* اللينك الصغير اللي تحت اللوحة */
+.creative-pointer {
+  margin-top: 30px; /* زودنا المسافة هنا لـ 30px أو أكتر حسب رغبتك */
+  text-align: left; /* عشان يفضل محاذي للشمال تحت اللوحة */
+  padding-left: 10px; /* إزاحة بسيطة جداً للشمال عشان يتماشى مع ميل اللوحة */
+}
+
+.small-link {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+  display: inline-block; /* عشان الـ margin والـ padding يشتغلوا بدقة */
+}
+
+.small-link:hover {
+  border-bottom-color: var(--accent-color);
+  letter-spacing: 1px; /* حركة شياكة لما تقف عليه */
+}
+
+
+/* الجزء السفلي: التوسيط السحري */
+.campaign-footer-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* التوسيط اللي طلبته */
+  justify-content: center;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.brand-title {
+  font-size: 5rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  letter-spacing: 5px;
+  color: #fff;
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, #fff, #444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* زرار More Campaigns */
+.btn-more-campaigns {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 18px 45px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-more-campaigns:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(164, 212, 60, 0.4);
+  background-color: #fff; /* بيقلب أبيض في الـ Hover كحركة شياكة */
+}
+
+.small-link {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: 0.3s;
+}
+
+.small-link:hover {
+  border-bottom-color: var(--accent-color);
+}
+
+/* الموبايل */
+@media (max-width: 992px) {
+  .campaign-detail.reversed .campaign-visuals {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .billboard-frame {
+    transform: none !important;
+    height: 300px;
+  }
+  
+  .brand-title {
+    font-size: 3rem;
+  }
+
+  .main-shot-v2 {
+    height: 350px;
+  }
+}
+
+.parallax-branding {
+  position: relative;
+  width: 100%;
+  padding: 120px 0;
+  background-color: #000;
+  overflow: hidden;
+}
+
+/* الخلفية الثابتة */
+.parallax-bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.4; /* عشان متغطيش على الكلام */
+}
+
+.static-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.campaign-container {
+  position: relative;
+  z-index: 5; /* فوق الخلفية */
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+/* توزيع الكولاج */
+.branding-visuals {
+  position: relative;
+  height: 600px; /* مساحة للصور المبعثرة */
+  margin-bottom: 60px;
+}
+
+.main-brand-card {
+  width: 55%;
+  position: relative;
+  z-index: 2;
+}
+
+.main-brand-card img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+/* ستايل الكروت المبعثرة */
+.float-card {
+  position: absolute;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+  animation: floating 3s ease-in-out infinite;
+  position: absolute;
+  z-index: 2;
+}
+
+.card-1 { width: 220px; top: 0; right: 15%; transform: rotate(5deg); z-index: 6; }
+.card-2 { width: 200px; top: 25%; right: 5%; transform: rotate(-8deg); z-index: 4; }
+.card-3 { width: 240px; bottom: 10%; right: 12%; transform: rotate(12deg); z-index: 7; }
+.card-4 { width: 180px; top: 10%; left: 45%; transform: rotate(-15deg); z-index: 3; }
+
+/* معلومات البراندينج */
+.branding-info {
+  text-align: left;
+}
+
+.project-name-v3 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 25px;
+  font-style: italic;
+  color: #fff;
+}
+
+.project-description-v3 {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #bbb;
+  max-width: 850px;
+  margin-bottom: 45px;
+}
+
+/* الزراير */
+.branding-actions {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.btn-more-branding {
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 16px 40px;
+  border-radius: 40px;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.btn-more-branding:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(164, 212, 60, 0.4);
+}
+
+.learn-more-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+}
+
+.learn-more-link:hover {
+  border-bottom-color: var(--accent-color);
+}
+
+
+
+
+
+
+
+
+/* الموبايل */
+@media (max-width: 992px) {
+  .branding-visuals { height: auto; display: flex; flex-direction: column; gap: 20px; }
+  .main-brand-card, .float-card { position: static; width: 100%; transform: none !important; }
+  .branding-actions { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+
+.social-grid-section {
+  background-color: #000;
+  padding: 80px 0;
+  text-align: center;
+  
+}
+
+.masonry-grid-static {
+  display: grid;
+  /* 4 أعمدة متساوية تماماً */
+  grid-template-columns: repeat(4, 1fr); 
+  /* تحديد ارتفاع صف افتراضي صغير */
+  grid-auto-rows: 150px; 
+  gap: 15px; /* المسافة بين الصور */
+  width: 100%;
+  margin-top: 50px;
+  perspective: 1000px;
+}
+
+.grid-item {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #111;
+  transition: all 0.4s ease;
+  
+}
+
+/* --- التحكم في الأبعاد --- */
+
+.grid-item.short {
+  grid-row: span 1; /* هتاخد 150px ارتفاع */
+}
+
+.grid-item.medium {
+  grid-row: span 1.5; /* هتاخد حوالي 225px */
+}
+
+.grid-item.tall {
+  grid-row: span 2; /* هتاخد 300px ارتفاع */
+}
+
+/* ضبط الصورة داخل البرواز */
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* مهم جداً عشان الصورة تملأ الفراغ بدون مط */
+  display: block;
+  filter: brightness(0.9);
+  transition: 0.5s ease;
+  
+}
+
+/* --- تأثير الـ Hover --- */
+.grid-item:hover {
+  transform: scale(1.02);
+  z-index: 5;
+}
+
+.grid-item:hover img {
+  filter: brightness(1.1);
+}
+
+/* الزرار الليموني */
+.grid-footer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-start; /* لليسار زي الصورة */
+}
+
+.btn-more-social {
+  background-color: #a4d43c;
+  color: #000;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.btn-more-social:hover{
+  background-color: #dcedc1;
+  color: #db1c1c;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .masonry-grid-static { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .masonry-grid-static { grid-template-columns: 1fr; }
+}
+
+.clients-section {
+  background-color: #0a0a0a;
+  padding: 100px 10%;
+  overflow: visible; /* عشان الصورة تخرج بره براحتها */
+
+}
+
+/* تصميم البرواز العلوي */
+.clients-header {
+  position: relative;
+  margin-bottom: 80px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.header-box {
+  background: linear-gradient(90deg, #333 0%, #1a1a1a 100%);
+  padding: 60px 50px;
+  border-radius: 40px;
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+}
+
+.clients-title {
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.clients-title .highlight {
+  color: #a4d43c; /* اللون الليموني بتاعك */
+  font-weight: 700;
+}
+
+/* تداخل الصورة */
+.header-image {
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+  width: 50%; /* تحكم في حجم الصورة */
+  z-index: 5;
+}
+
+.header-image img {
+  width: 100%;
+  display: block;
+  /* لو الصورة ليها خلفية وعايز تخليها أبيض وأسود زي الصورة */
+  filter: grayscale(100%);
+}
+
+.logos-grid {
+  display: grid;
+  /* 6 أعمدة متساوية في الشاشات الكبيرة */
+  grid-template-columns: repeat(6, 1fr); 
+  
+  /* gap: المسافة الرأسية 50px والمسافة الأفقية 30px */
+  gap: 50px 30px; 
+  
+  align-items: center;
+  margin-top: 80px; /* مسافة أكبر شوية عن العنوان */
+}
+
+.logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px; /* توحيد الارتفاع لكل اللوجوهات عشان الصفوف تبان متساوية */
+  transition: all 0.3s ease;
+}
+
+.logo-item img {
+  max-width: 140px; /* عرض مناسب لكل لوجو */
+  max-height: 60px; /* ارتفاع مناسب عشان ميبقاش ضخم */
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* اللون الأبيض الموحد الفخم */
+  opacity: 0.7;
+  transition: 0.4s ease;
+}
+
+.logo-item:hover img {
+  opacity: 1;
+  transform: scale(1.15); /* تكبير أوضح عند الـ Hover */
+  transform: rotate(5deg) scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.and-more {
+  color: #a4d43c;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .clients-title { font-size: 2.5rem; }
+  .logos-grid { grid-template-columns: repeat(3, 1fr); }
+  .header-image { width: 40%; position: static; margin-left: auto; }
+  .clients-header { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .logos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+.instagram-section {
+  background-color: #000;
+  padding: 80px 0;
+}
+
+.insta-title {
+  color: #fff;
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 500;
+}
+
+.insta-title .highlight {
+  color: #a4d43c; /* اللون الليموني */
+  font-weight: 700;
+}
+
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.insta-card {
+  position: relative;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  /* نسبة الـ Reel (طويل) */
+  aspect-ratio: 9 / 16; 
+  cursor: pointer;
+}
+
+.insta-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* عشان يملأ الكارت بالظبط */
+  transition: transform 0.5s ease;
+}
+
+.insta-card:hover video {
+  transform: scale(1.05);
+}
+
+.insta-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: #fff;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.insta-card:hover .insta-overlay {
+  opacity: 1;
+}
+
+/* للموبايل */
+@media (max-width: 768px) {
+  .insta-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* منع ظهور العناصر قبل ما GSAP يشتغل */
+.grid-item, .logo-item, .insta-card, .header-box {
+  visibility: visible; /* لو عايز تخفيهم تماماً استخدم opacity: 0 في الـ CSS */
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px) rotate(5deg); }
+  50% { transform: translateY(-15px) rotate(7deg); }
+  100% { transform: translateY(0px) rotate(5deg); }
+}

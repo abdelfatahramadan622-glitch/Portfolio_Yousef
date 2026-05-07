@@ -1,0 +1,308 @@
+<section class="hero-container" id="hero">
+  <div class="hero-content">
+    <div class="text-wrapper">
+      <h1 class="greeting">Hello, I'm</h1>
+      <h2 class="name">Youssef Salah</h2>
+      <div class="job-title-container">
+        <span class="job-title">Senior Frontend Developer</span>
+      </div>
+      <p class="description">
+        Crafting modern, high-performance web experiences with precision and passion.
+      </p>
+      <div class="cta-buttons">
+        <a routerLink="/portfolio" class="btn-primary">View My Work</a>
+        <a routerLink="/contactus" class="btn-secondary">Let's Talk</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image-area">
+    <!-- الحاوية الأساسية للصورة -->
+    <div class="image-wrapper">
+      <!-- مكان الصورة -->
+      <img src="/222.png" alt="Youssef Salah" class="profile-img">
+      
+      <!-- الـ Logo Badge مدمج الآن بالداخل -->
+      <div class="logo-badge-integrated">
+        <div class="badge-circle">
+          <div class="badge-text">Creative Design</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section reveal-effect" id="about">
+  <div class="container">
+    <h2 class="section-title">About <span class="highlight">Me</span></h2>
+    <p class="about-text">
+      I'm a <span class="bold">Frontend Developer</span> with a passion for building 
+      modern and responsive web applications. I focus on writing clean, maintainable code 
+      and creating engaging user experiences. Creativity isn't just my job; it's how I see and shape the world.
+    </p>
+  </div>
+</section>
+
+<!-- Portfolio Section (Summary) -->
+<section class="portfolio-summary reveal-effect" id="portfolio">
+  <div class="container">
+    <h2 class="section-title">Portfolio</h2>
+    <p class="portfolio-subtitle">
+      A short summary of my recent projects, highlighting the most important things.
+    </p>
+    
+    <!-- Filter Buttons -->
+    <div class="filter-container">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Campaigns</button>
+      <button class="filter-btn">Branding</button>
+      <button class="filter-btn">Master Visuals</button>
+      <button class="filter-btn">Social Media</button>
+      <button class="filter-btn">Personal Projects</button>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="campaign-detail reveal-effect">
+  <h2 class="campaign-title">Campaigns</h2>
+
+  <div class="campaign-container">
+    <!-- الجزء العلوي: الصور -->
+    <div class="campaign-visuals">
+      <div class="main-shot">
+        <img src="/1234.gif" alt="RTX 5090 Close up">
+      </div>
+      
+      <div class="mood-board">
+        <!-- الصورة اللي فيها الرسم التخطيطي والكولاج -->
+        <img src="/222.png" alt="Design Assets" class="assets-img">
+        <!-- السهم الأخضر اللي بيوصل بين الصور (ممكن تستخدم صورة سهم PNG) -->
+        <div class="connection-arrow"></div>
+      </div>
+    </div>
+
+    <!-- الجزء السفلي: المعلومات -->
+    <div class="campaign-info">
+      <h3 class="project-name">
+        Asus ROG MENA | <span class="highlight">RTX 5090 Dhahab Edition</span>
+      </h3>
+      
+      <p class="project-description">
+        The <strong>ASUS ROG RTX 5090 Dhahab Edition</strong> launched as a <strong>360° campaign</strong> under the theme 
+        <em>"From Sands to Skyscrapers."</em> The idea began with sketches inspired by <strong>Arabian gold</strong>, 
+        desert light, and modern architecture, then evolved into a unified visual story across product design, 
+        film, and digital platforms—a celebration of <strong>heritage, progress, and power</strong> made for the Middle East.
+      </p>
+      
+      <a href="#" class="learn-more">Learn more about the project <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- سكشن الـ Billboard المقلوب -->
+<section class="campaign-detail reversed reveal-effect">
+  <div class="campaign-container">
+    <div class="campaign-visuals">
+      
+      <!-- الجزء الشمال: الـ Billboard بـ تأثير 3D -->
+      <div class="billboard-wrapper">
+        <div class="billboard-frame">
+          <img src="assets/images/billboard-img.jpg" alt="Creative Campaign">
+        </div>
+        <div class="creative-pointer">
+          <a href="#" class="small-link">View Creative Process</a>
+        </div>
+      </div>
+
+      <!-- الجزء اليمين: الصورة الثابتة -->
+      <div class="main-shot-v2">
+        <img src="assets/images/unplugged-main.jpg" alt="Project Main Shot">
+      </div>
+      
+    </div>
+
+    <!-- الجزء السفلي: العنوان والزرار (متوسطين) -->
+    <div class="campaign-footer-action">
+      <h2 class="brand-title">UNPLUGGED</h2>
+      <p class="project-description" style="text-align: center; margin: 0 auto 30px;">
+        A visual journey exploring the intersection of technology and human connection.
+      </p>
+      <a href="#" class="btn-more-campaigns">More Campaigns</a>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="parallax-branding reveal-effect">
+  <!-- الخلفية اللي ورا -->
+  <div class="parallax-bg-wrapper">
+    <img src="/1234.gif" alt="Background" class="static-bg">
+  </div>
+
+  <div class="campaign-container">
+    <div class="branding-layout">
+      
+      <!-- الكولاج (الصور المبعثرة) -->
+      <div class="branding-visuals">
+        <!-- الصورة الأساسية الكبيرة -->
+        <div class="main-brand-card">
+          <img src="/1234.gif" alt="Essence Main">
+        </div>
+        
+        <!-- الصور المبعثرة (Cards) -->
+        <img src="/222.png" class="float-card card-1" alt="Featured">
+        
+      </div>
+
+      <!-- النصوص والزراير -->
+      <div class="branding-info">
+        <h3 class="project-name-v3">ESSENCE ADVERTS | <span class="highlight">Visual Identity</span></h3>
+        
+        <p class="project-description-v3">
+          Essence Adverts stands as a world-class integrated marketing agency powered by data, science, and design clarity. The new visual identity brings that mindset to life—bold, minimal, and confident.
+        </p>
+        
+        <div class="branding-actions">
+          <a href="#" class="btn-more-branding">More Branding</a>
+          <a href="#" class="learn-more-link">Learn more about the project <span>→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section class="social-grid-section reveal-effect">
+  <div class="campaign-container">
+    <h2 class="section-main-title">Social-Media</h2>
+
+    <div class="masonry-grid-static">
+      <!-- صورة مربعة (قصيرة) -->
+      <div class="grid-item short">
+        <img src="assets/images/sm1.jpg" alt="Design">
+      </div>
+
+      <!-- صورة متوسطة الطول -->
+      <div class="grid-item medium">
+        <img src="assets/images/sm2.jpg" alt="Design">
+      </div>
+
+      <!-- صورة طويلة جداً (Tall) -->
+      <div class="grid-item tall">
+        <img src="assets/images/sm3.jpg" alt="Design">
+      </div>
+
+      <!-- كرر ووزع الكلاسات براحتك عشان تعمل العشوائية -->
+      <div class="grid-item medium">
+        <img src="assets/images/sm4.jpg" alt="Design">
+      </div>
+      <div class="grid-item short">
+        <img src="assets/images/sm5.jpg" alt="Design">
+      </div>
+      <div class="grid-item tall">
+        <img src="assets/images/sm6.jpg" alt="Design">
+      </div>
+    </div>
+
+    <div class="grid-footer">
+      <a href="#" class="btn-more-social">View All Designs</a>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="clients-section reveal-effect">
+  <div class="campaign-container">
+    
+    <!-- الجزء العلوي: العنوان والصورة المتداخلة -->
+    <div class="clients-header">
+      <div class="header-box">
+        <h2 class="clients-title">
+          "Clients I have <br>
+          <span class="highlight">collaborated with.</span>"
+        </h2>
+      </div>
+      <!-- الصورة اللي خارجة بره البرواز -->
+      <div class="header-image">
+        <img src="assets/images/handshake-character.png" alt="Collaboration">
+      </div>
+    </div>
+
+    <div class="logos-grid">
+      <!-- الصف الأول -->
+      <div class="logo-item"><img src="assets/images/logo1.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo2.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo3.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo4.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo5.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo6.png" alt="Client"></div>
+
+      <!-- الصف الثاني (هيفتح لوحده) -->
+      <div class="logo-item"><img src="assets/images/logo7.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo8.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo9.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo10.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo11.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo12.png" alt="Client"></div>
+
+      <!-- الصف الثالث (وهكذا...) -->
+      <div class="logo-item"><img src="assets/images/logo13.png" alt="Client"></div>
+      <div class="logo-item"><img src="assets/images/logo14.png" alt="Client"></div>
+      <!-- كمل براحتك... -->
+    </div>
+
+    <p class="and-more">and more...</p>
+    
+  </div>
+</section>
+
+
+
+
+<section class="instagram-section reveal-effect">
+  <div class="campaign-container">
+    <h2 class="insta-title">Follow <span class="highlight">Instagram</span></h2>
+
+    <div class="insta-grid">
+      <!-- فيديو 1 -->
+      <div class="insta-card" 
+           (mouseenter)="playVid(v1)" 
+           (mouseleave)="pauseVid(v1)">
+        <video #v1 src="assets/videos/reel1.mp4" muted loop playsinline></video>
+        <div class="insta-overlay"><span>@Yousef_Portfolio</span></div>
+      </div>
+
+      <!-- فيديو 2 -->
+      <div class="insta-card" 
+           (mouseenter)="playVid(v2)" 
+           (mouseleave)="pauseVid(v2)">
+        <video #v2 src="assets/videos/reel2.mp4" muted loop playsinline></video>
+        <div class="insta-overlay"><span>@Yousef_Portfolio</span></div>
+      </div>
+
+      <!-- فيديو 3 -->
+      <div class="insta-card" 
+           (mouseenter)="playVid(v3)" 
+           (mouseleave)="pauseVid(v3)">
+        <video #v3 src="assets/videos/reel3.mp4" muted loop playsinline></video>
+        <div class="insta-overlay"><span>@Yousef_Portfolio</span></div>
+      </div>
+
+      <!-- فيديو 4 -->
+      <div class="insta-card" 
+           (mouseenter)="playVid(v4)" 
+           (mouseleave)="pauseVid(v4)">
+        <video #v4 src="assets/videos/reel4.mp4" muted loop playsinline></video>
+        <div class="insta-overlay"><span>@Yousef_Portfolio</span></div>
+      </div>
+    </div>
+  </div>
+</section>

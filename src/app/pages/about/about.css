@@ -1,0 +1,386 @@
+/* ---------------------------------------------------
+    1. GENERAL & REVEAL RESET
+--------------------------------------------------- */
+.about-page-wrapper {
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* التصفير الابتدائي لكل عنصر واخد كلاس الـ Reveal */
+.reveal-effect > *, 
+.reveal-effect .exp-item, 
+.reveal-effect .skill-item {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: transform, opacity;
+}
+
+/* ---------------------------------------------------
+    2. ABOUT HERO SECTION (Top Part)
+--------------------------------------------------- */
+.about-hero {
+    padding: 100px 8%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle at top right, #111, #000);
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    width: 100%;
+    align-items: stretch; /* يخلي اليمين والشمال نفس الطول */
+}
+
+.brand-signature { position: relative; margin-bottom: 20px; }
+
+.by-text {
+    font-family: 'Dancing Script', cursive;
+    color: #a3ff00;
+    font-size: 2.5rem;
+    position: absolute;
+    top: -30px;
+    left: 20px;
+    transform: rotate(-12deg);
+    z-index: 2;
+}
+
+.main-name {
+    font-size: clamp(5rem, 10vw, 9rem);
+    font-weight: 900;
+    line-height: 0.8;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.sub-info {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.about-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 550px;
+    color: #e0e0e0;
+}
+
+.education-box {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 20px;
+    width: fit-content;
+}
+
+.meme-wrapper { position: relative; width: 110px; height: 110px; }
+.meme-img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+.who-cares-text {
+    position: absolute;
+    top: -20px;
+    right: -40px;
+    color: #a3ff00;
+    font-family: 'Dancing Script', cursive;
+    transform: rotate(15deg);
+}
+
+.uni-name { background: #a3ff00; color: #000; padding: 2px 8px; font-weight: bold; }
+
+/* برواز الصورة اليمين - متناسق الارتفاع */
+.about-image-area { display: flex; height: 550px; }
+.frame-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: 650px; /* ممكن تظبط الرقم ده حسب رغبتك */
+    cursor: pointer;
+}
+
+.frame-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -15px; left: -15px; right: -15px; bottom: -15px;
+    border: 3px solid #a3ff00;
+    border-radius: 10px;
+    clip-path: polygon(0% 0%, 100% 2%, 98% 100%, 2% 99%);
+    z-index: -1;
+}
+
+.about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%) contrast(110%);
+    transition: filter 0.5s ease;
+}
+
+
+
+
+
+/* --- الجزء الأول: سكشن الخبرات --- */
+.experience-block {
+    padding: 120px 8%;
+    background: radial-gradient(circle at top right, #111, #000);
+    border-top: 1px solid rgba(163, 255, 0, 0.1);
+}
+
+.experience-block .section-title {
+    color: #a3ff00;
+    font-size: 3.5rem;
+    text-align: center; /* زي ما طلبتها في الكود الأخير */
+    margin-bottom: 70px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* الـ 4 أعمدة اللي ظبطناهم */
+    gap: 40px;
+    margin-bottom: 20px; /* قللنا الـ margin هنا لأن السكشن بقى منفصل */
+}
+
+.exp-item {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 20px;
+    transition: all 0.3s ease;
+}
+
+.exp-item:hover {
+    border-left: 1px solid #a3ff00;
+    transform: translateX(5px);
+}
+
+.exp-item h3 { 
+    font-size: 1.1rem; 
+    margin-bottom: 8px; 
+    color: #a3ff00; 
+    line-height: 1.2; 
+}
+
+.exp-item h3 span { 
+    color: #fff; 
+    display: block; 
+    font-size: 0.9rem; 
+    margin-top: 4px; 
+    opacity: 0.8; 
+}
+
+.exp-item .date { 
+    color: #888; 
+    font-size: 0.85rem; 
+    font-weight: 500; 
+}
+
+.exp-item .role { 
+    color: #555; 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    margin-top: 10px; 
+    letter-spacing: 1px; 
+}
+
+/* التجاوب للموبايل لجزء الخبرات */
+@media (max-width: 1024px) {
+    .experience-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .experience-grid { grid-template-columns: 1fr; }
+}
+
+
+
+/* --- الجزء الثاني: سكشن البانر --- */
+.banner-block {
+    padding: 80px 8%;
+    background: #000; /* خلفية سوداء سادة عشان تبرز الـ Glow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible; /* مهم جداً عشان الكلمات المتطايرة */
+}
+
+.creative-banner {
+    width: 80%;
+    max-width: 900px; 
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.banner-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: visible; 
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.banner-img {
+    width: 100%;
+    height: 550px; /* الارتفاع اللي ريحك في الكود الأخير */
+    display: block;
+    object-fit: contain; /* عشان الصورة تظهر كاملة بدون قص */
+    filter: grayscale(100%) contrast(1.1) brightness(0.7);
+    border-radius: 12px;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* الهالة المضيئة خلف الصورة */
+.banner-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    background: rgba(163, 255, 0, 0.1);
+    filter: blur(80px);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.creative-banner:hover .banner-img {
+    filter: grayscale(0%) contrast(1) brightness(1);
+    transform: scale(1.02);
+}
+
+/* الكلمات المتطايرة */
+.floating-word {
+    position: absolute;
+    font-family: 'Dancing Script', cursive;
+    color: #a3ff00;
+    font-size: clamp(1.2rem, 3vw, 2.5rem);
+    pointer-events: none;
+    z-index: 10;
+    text-shadow: 0 0 20px rgba(0,0,0,1);
+    transition: all 0.5s ease;
+}
+
+/* توزيع الكلمات بناءً على كودك */
+.w1 { top: -20px; left: -30px; transform: rotate(-15deg); font-size: 3.5rem; }
+.w2 { top: 20%; right: -50px; transform: rotate(15deg); }
+.w3 { bottom: 10%; left: -40px; transform: rotate(-10deg); color: #fff; }
+.w4 { bottom: -25px; right: 20%; transform: rotate(-5deg); font-size: 3rem; }
+
+/* للموبايل: بنصغر الارتفاع والكلمات عشان الدنيا متبقاش زحمة */
+@media (max-width: 768px) {
+    .banner-img { height: 350px; }
+    .floating-word { font-size: 1.5rem !important; }
+    .w2 { right: -10px; }
+    .w1 { left: 0; }
+}
+
+
+
+
+/* --- الجزء الثالث والأخير: سكشن المهارات --- */
+.skills-block {
+    padding: 100px 8% 120px 8%; /* مساحة كافية في النهاية */
+    background: #000;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.skills-block .section-title {
+    color: #a3ff00;
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 70px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* الـ 4 أعمدة اللي ريحوا العين */
+    gap: 50px;
+}
+
+.skill-item {
+    transition: transform 0.3s ease;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px); /* حركة خفيفة للفوق عند الـ Hover */
+}
+
+.skill-item h4 { 
+    color: #a3ff00; 
+    font-size: 1.1rem; 
+    margin-bottom: 12px; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* النقطة الخضراء الاحترافية قبل كل مهارة */
+.skill-item h4::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #a3ff00;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.skill-item p { 
+    color: #888; 
+    font-size: 0.9rem; 
+    line-height: 1.6; 
+    margin: 0;
+}
+
+/* التجاوب للموبايل لجزء المهارات */
+@media (max-width: 1100px) {
+    .skills-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 40px;
+    }
+}
+
+@media (max-width: 650px) {
+    .skills-grid { 
+        grid-template-columns: 1fr; 
+        gap: 30px;
+    }
+    .skills-block .section-title {
+        font-size: 2.5rem;
+    }
+}
+
+
+
+
+
+
+
+/* ---------------------------------------------------
+    4. RESPONSIVE DESIGN
+--------------------------------------------------- */
+@media (max-width: 1024px) {
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .about-container { grid-template-columns: 1fr; }
+    .about-image-area { height: 450px; }
+    .main-name { font-size: 4rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .experience-grid { grid-template-columns: 1fr; text-align: center; }
+}
